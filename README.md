@@ -1,13 +1,14 @@
-# AYS CONCEPT YÖNETİM
+# AYS CONCEPT YÖNETİM – Supabase giriş sürümü
 
-Bu depo, AYS CONCEPT için hazırlanan ilk web paneli arayüz prototipini içerir.
+1. ZIP içindeki `index.html`, `config.js` dosyalarını GitHub deposunun ana dizinine yükleyin ve eski `index.html` dosyasını değiştirin.
+2. Supabase > Project Settings > API Keys bölümünden **Publishable key** değerini kopyalayın.
+3. `config.js` dosyasını GitHub'da düzenleyin. `BURAYA_SUPABASE_PUBLISHABLE_KEY` yazan yere publishable key'i yapıştırın.
+4. `config.js` değişikliğini kaydedin. GitHub Pages yeniden yayınlanınca siteyi açın.
+5. Oluşturduğunuz Supabase kullanıcı e-postası ve şifresiyle giriş yapın.
 
-## GitHub Pages ile yayınlama
-1. GitHub'da `ays-concept-yonetim` adında yeni bir repository oluşturun.
-2. Bu klasördeki `index.html` dosyasını repository'nin ana dizinine yükleyin.
-3. Repository > Settings > Pages bölümüne girin.
-4. Deploy from a branch seçin.
-5. Branch olarak `main`, klasör olarak `/ (root)` seçip Save'e basın.
+Project URL config.js içinde önceden ayarlanmıştır: https://etmcdxzyltyllangnzgt.supabase.co
 
-## Önemli güvenlik notu
-Bu sürüm yalnızca ön yüz prototipidir ve demo görünümündedir. Gerçek sipariş, ürün, fiyat veya stok verisi çekmez/değiştirmez. Trendyol/Hepsiburada API anahtarları hiçbir zaman bu HTML dosyasına veya GitHub'a konulmamalıdır. Gerçek entegrasyon için güvenli bir backend, veritabanı, kimlik doğrulama ve API erişim bilgileri gerekir.
+Güvenlik:
+- Yalnızca Publishable key (veya eski anon public key) kullanılmalıdır.
+- `secret` veya `service_role` anahtarını asla GitHub'a ya da tarayıcı koduna koymayın.
+- Bu sürüm yalnızca giriş/çıkış ve demo paneli sağlar; pazaryeri API bağlantısı ve veri işlemleri henüz etkin değildir.
