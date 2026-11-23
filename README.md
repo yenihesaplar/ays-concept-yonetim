@@ -1,14 +1,8 @@
-# AYS CONCEPT YÖNETİM – Supabase giriş sürümü
+AYS CONCEPT YÖNETİM – Ürün Yönetimi
 
-1. ZIP içindeki `index.html`, `config.js` dosyalarını GitHub deposunun ana dizinine yükleyin ve eski `index.html` dosyasını değiştirin.
-2. Supabase > Project Settings > API Keys bölümünden **Publishable key** değerini kopyalayın.
-3. `config.js` dosyasını GitHub'da düzenleyin. `BURAYA_SUPABASE_PUBLISHABLE_KEY` yazan yere publishable key'i yapıştırın.
-4. `config.js` değişikliğini kaydedin. GitHub Pages yeniden yayınlanınca siteyi açın.
-5. Oluşturduğunuz Supabase kullanıcı e-postası ve şifresiyle giriş yapın.
+1. ZIP içindeki index.html dosyasını GitHub deposunun ana dizinine yükleyin ve mevcut index.html dosyasını değiştirin.
+2. Mevcut config.js dosyanızı KORUYUN. İçindeki çalışan Supabase URL ve Publishable key silinmemeli/değiştirilmemeli.
+3. GitHub'da Commit changes yapın, Pages yayınlandıktan sonra Ctrl+F5 ile yenileyin.
+4. Yönetici hesabınızla giriş yapın.
 
-Project URL config.js içinde önceden ayarlanmıştır: https://etmcdxzyltyllangnzgt.supabase.co
-
-Güvenlik:
-- Yalnızca Publishable key (veya eski anon public key) kullanılmalıdır.
-- `secret` veya `service_role` anahtarını asla GitHub'a ya da tarayıcı koduna koymayın.
-- Bu sürüm yalnızca giriş/çıkış ve demo paneli sağlar; pazaryeri API bağlantısı ve veri işlemleri henüz etkin değildir.
+Bu sürüm Supabase products tablosundan ürünleri listeler; ürün ekleme, düzenleme, silme ve arama sağlar. Yalnızca kendi veritabanına kaydeder. Trendyol/Hepsiburada'ya henüz ürün veya stok aktarmaz.

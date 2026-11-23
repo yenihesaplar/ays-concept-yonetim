@@ -1,139 +1,40 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AYS CONCEPT YÖNETİM</title>
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AYS CONCEPT YÖNETİM</title>
 <style>
-:root{--navy:#17243b;--gold:#c7a56a;--bg:#f4f6fa;--text:#202a3a;--muted:#778196;--line:#e7eaf0;--white:#fff;--green:#16845b}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-.hidden{display:none!important}
-.auth-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#17243b,#263c5d)}
-.auth-card{width:min(420px,100%);background:#fff;border-radius:16px;padding:30px;box-shadow:0 18px 60px #0003}
-.brand{text-align:center;margin-bottom:25px}.brand b{font-size:23px;letter-spacing:1px;color:var(--navy)}.brand span{display:block;color:#a7834c;font-size:11px;letter-spacing:3px;margin-top:7px}
-.auth-card h1{font-size:20px;margin:0 0 7px}.sub{font-size:13px;color:var(--muted);margin:0 0 22px}
-label{display:block;font-size:12px;font-weight:600;margin:15px 0 7px}
-input{width:100%;padding:12px 13px;border:1px solid #dce1e9;border-radius:9px;font-size:14px;outline:none}input:focus{border-color:#b99a65;box-shadow:0 0 0 3px #c7a56a22}
-button{border:0;border-radius:9px;padding:12px 16px;font-weight:700;cursor:pointer}
-.primary{background:var(--green);color:#fff;width:100%;margin-top:20px}.primary:disabled{opacity:.6;cursor:wait}
-.msg{font-size:12px;line-height:1.5;margin-top:13px;color:#b42318}.hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:17px}
-.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.sidebar{background:var(--navy);color:#fff;padding:25px 17px;display:flex;flex-direction:column}.sidebrand{padding:5px 10px 25px;border-bottom:1px solid #344158}.sidebrand b{font-size:19px}.sidebrand span{display:block;color:#d2b77f;font-size:10px;letter-spacing:2px;margin-top:7px}.nav{padding-top:20px}.nav a{display:block;color:#c6cede;text-decoration:none;padding:12px;border-radius:8px;font-size:13px;margin:4px 0}.nav a.active{background:#2a3953;color:white}.sidefoot{margin-top:auto;background:#22314a;padding:13px;border-radius:9px;color:#c1cad8;font-size:11px;line-height:1.5}
-main{padding:28px 32px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.eyebrow{font-size:11px;color:var(--muted);letter-spacing:1px}.top h1{font-size:25px;margin:7px 0}.user{font-size:12px;color:#526078;background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:9px}
-.notice{background:#fff8e9;border:1px solid #f0dfbd;color:#765b2b;padding:12px 14px;border-radius:9px;font-size:12px;line-height:1.5;margin-bottom:20px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px}.stat-label{font-size:12px;color:var(--muted)}.stat-value{font-size:26px;font-weight:bold;margin:12px 0 5px}.stat-foot{font-size:11px;color:var(--muted)}
-.section{margin:26px 0 12px;font-size:16px}.content{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.panel h3{font-size:14px;margin:0 0 15px}.channel{padding:13px 0;border-bottom:1px solid var(--line);font-size:12px}.channel:last-child{border:0}.channel small{display:block;color:var(--muted);margin-top:4px}.status{float:right;background:#eef2f7;color:#59677c;border-radius:20px;padding:5px 8px;font-size:10px}
-.logout{background:#fff;border:1px solid var(--line);color:#42506a}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.content{grid-template-columns:1fr}}
-@media(max-width:650px){.app{grid-template-columns:1fr}.sidebar{padding:15px}.nav{display:flex;overflow:auto;gap:4px}.nav a{white-space:nowrap;font-size:11px;padding:9px}.sidefoot{display:none}main{padding:20px 14px}.top h1{font-size:21px}.grid{gap:9px}.stat{padding:12px}.stat-value{font-size:22px}}
-</style>
-</head>
-<body>
-<section id="loginView" class="auth-wrap">
-  <div class="auth-card">
-    <div class="brand"><b>AYS CONCEPT</b><span>YÖNETİM PANELİ</span></div>
-    <h1>Yönetici girişi</h1>
-    <p class="sub">Devam etmek için hesabınızla giriş yapın.</p>
-    <form id="loginForm">
-      <label for="email">E-posta adresi</label>
-      <input id="email" type="email" autocomplete="username" required placeholder="ornek@eposta.com">
-      <label for="password">Şifre</label>
-      <input id="password" type="password" autocomplete="current-password" required placeholder="Şifreniz">
-      <button id="loginBtn" class="primary" type="submit">Giriş yap</button>
-      <div id="loginMessage" class="msg" role="alert"></div>
-    </form>
-    <p class="hint">Bu ekran Supabase kimlik doğrulamasını kullanır. Henüz pazaryeri siparişlerini veya stoklarını çekmez.</p>
-  </div>
-</section>
-<div id="appView" class="app hidden">
-  <aside class="sidebar">
-    <div class="sidebrand"><b>AYS CONCEPT</b><span>YÖNETİM PANELİ</span></div>
-    <nav class="nav">
-      <a class="active" href="#">▦ &nbsp; Genel Bakış</a>
-      <a href="#orders">▤ &nbsp; Siparişler</a>
-      <a href="#products">□ &nbsp; Ürünler</a>
-      <a href="#stock">▧ &nbsp; Stok Yönetimi</a>
-      <a href="#pricing">₺ &nbsp; Fiyat Yönetimi</a>
-      <a href="#reports">▥ &nbsp; Raporlar</a>
-      <a href="#settings">⚙ &nbsp; Mağaza Ayarları</a>
-    </nav>
-    <div class="sidefoot">Güvenli oturum açık. Pazaryeri API bağlantıları henüz kurulmadı.</div>
-  </aside>
-  <main>
-    <div class="top">
-      <div><div class="eyebrow">AYS CONCEPT / YÖNETİM</div><h1>Genel Bakış</h1></div>
-      <div><span id="userEmail" class="user"></span> <button id="logoutBtn" class="logout">Çıkış</button></div>
-    </div>
-    <div class="notice"><b>Kurulum aşaması:</b> Yönetici girişi Supabase ile çalışıyor. Trendyol ve Hepsiburada henüz bağlı değil; bu ekran gerçek sipariş veya stok değişikliği yapmaz.</div>
-    <div class="grid">
-      <div class="stat"><div class="stat-label">Bugünkü Sipariş</div><div class="stat-value">—</div><div class="stat-foot">Mağazalar bağlandığında gösterilecek</div></div>
-      <div class="stat"><div class="stat-label">Toplam Ürün</div><div class="stat-value">—</div><div class="stat-foot">Ürün kataloğu henüz aktarılmadı</div></div>
-      <div class="stat"><div class="stat-label">Kritik Stok</div><div class="stat-value">—</div><div class="stat-foot">Ortak stok bağlantısı bekleniyor</div></div>
-      <div class="stat"><div class="stat-label">Bugünkü Ciro</div><div class="stat-value">—</div><div class="stat-foot">Satış verisi henüz alınmıyor</div></div>
-    </div>
-    <h2 class="section">Mağaza bağlantıları</h2>
-    <div class="content">
-      <section class="panel"><h3>Pazaryerleri</h3>
-        <div class="channel"><b>Trendyol</b><span class="status">Bağlanmadı</span><small>API bağlantısı kurulmadı</small></div>
-        <div class="channel"><b>Hepsiburada</b><span class="status">Bağlanmadı</span><small>API bağlantısı kurulmadı</small></div>
-      </section>
-      <section class="panel"><h3>Sonraki geliştirmeler</h3>
-        <div class="channel"><b>Ürünleri içe aktar</b><small>Mağaza bağlantısından sonra</small></div>
-        <div class="channel"><b>Stokları eşitle</b><small>Ortak stok altyapısı</small></div>
-        <div class="channel"><b>Fiyatları güncelle</b><small>Toplu fiyat yönetimi</small></div>
-      </section>
-    </div>
-  </main>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="./config.js"></script>
+:root{--navy:#17243b;--gold:#c7a56a;--bg:#f4f6fa;--text:#202a3a;--muted:#778196;--line:#e7eaf0;--green:#16845b;--red:#b42318}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}.hidden{display:none!important}
+.auth{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#17243b,#263c5d)}.authbox{width:min(420px,100%);background:white;border-radius:16px;padding:30px;box-shadow:0 18px 60px #0003}.brand{text-align:center;margin-bottom:25px}.brand b{font-size:23px;letter-spacing:1px;color:var(--navy)}.brand span{display:block;color:#a7834c;font-size:11px;letter-spacing:3px;margin-top:7px}
+h1{font-size:24px;margin:7px 0}h2{font-size:17px;margin:0}h3{font-size:14px;margin:0 0 14px}.muted{color:var(--muted);font-size:12px}label{display:block;font-size:12px;font-weight:bold;margin:13px 0 6px}input,textarea{width:100%;padding:11px 12px;border:1px solid #dce1e9;border-radius:8px;font-size:13px;background:white;color:var(--text)}button{border:0;border-radius:8px;padding:10px 14px;font-weight:bold;cursor:pointer}.primary{background:var(--green);color:white}.secondary{background:#eef2f7;color:#40506a}.danger{background:#fff0ef;color:var(--red)}.msg{font-size:12px;color:var(--red);margin-top:12px;line-height:1.5;min-height:16px}
+.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:var(--navy);color:white;padding:25px 17px;display:flex;flex-direction:column}.sidebrand{padding:5px 10px 25px;border-bottom:1px solid #344158}.sidebrand b{font-size:19px}.sidebrand span{display:block;color:#d2b77f;font-size:10px;letter-spacing:2px;margin-top:7px}.nav{padding-top:20px}.nav a{display:block;color:#c6cede;text-decoration:none;padding:12px;border-radius:8px;font-size:13px;margin:4px 0}.nav a.active{background:#2a3953;color:white}.sidefoot{margin-top:auto;background:#22314a;padding:13px;border-radius:9px;color:#c1cad8;font-size:11px;line-height:1.5}
+main{padding:27px 30px;min-width:0}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.eyebrow{font-size:11px;color:var(--muted);letter-spacing:1px}.user{font-size:11px;color:#526078;background:white;border:1px solid var(--line);padding:9px 11px;border-radius:8px}.logout{background:white;border:1px solid var(--line);color:#42506a}.notice{background:#fff8e9;border:1px solid #f0dfbd;color:#765b2b;padding:11px 14px;border-radius:9px;font-size:12px;line-height:1.5;margin-bottom:18px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 13px}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:17px}.filters{display:flex;gap:9px;margin-bottom:13px}.filters input{max-width:340px}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:700px}th{text-align:left;color:var(--muted);font-size:10px;padding:11px 9px;border-bottom:1px solid var(--line)}td{font-size:12px;padding:12px 9px;border-bottom:1px solid #f0f1f4}.num{text-align:right;font-variant-numeric:tabular-nums}.empty{text-align:center;color:var(--muted);padding:32px 10px;font-size:13px}.statusline{font-size:12px;color:var(--muted);margin:10px 0;min-height:16px}
+.modalback{position:fixed;inset:0;background:#10182788;display:grid;place-items:center;padding:18px;z-index:10}.modal{width:min(560px,100%);max-height:90vh;overflow:auto;background:white;border-radius:14px;padding:22px}.modalhead{display:flex;justify-content:space-between;align-items:center}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 13px}.actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+@media(max-width:850px){.app{grid-template-columns:1fr}.side{padding:14px}.nav{display:flex;overflow:auto;gap:4px;padding-top:12px}.nav a{white-space:nowrap;font-size:11px;padding:9px}.sidefoot{display:none}main{padding:19px 13px}}@media(max-width:520px){.formgrid{grid-template-columns:1fr}.toolbar{align-items:flex-start;flex-direction:column}.filters{flex-direction:column}.filters input{max-width:none}}
+</style></head><body>
+<section id="loginView" class="auth"><div class="authbox"><div class="brand"><b>AYS CONCEPT</b><span>YÖNETİM PANELİ</span></div><h2>Yönetici girişi</h2><p class="muted">Devam etmek için hesabınızla giriş yapın.</p><form id="loginForm"><label>E-posta adresi</label><input id="email" type="email" autocomplete="username" required><label>Şifre</label><input id="password" type="password" autocomplete="current-password" required><button id="loginBtn" class="primary" style="width:100%;margin-top:18px">Giriş yap</button><div id="loginMsg" class="msg"></div></form></div></section>
+<div id="appView" class="app hidden"><aside class="side"><div class="sidebrand"><b>AYS CONCEPT</b><span>YÖNETİM PANELİ</span></div><nav class="nav"><a class="active" href="#">□ &nbsp; Ürün Yönetimi</a><a href="#orders">▤ &nbsp; Siparişler (sonraki aşama)</a><a href="#stock">▧ &nbsp; Stok Yönetimi</a><a href="#pricing">₺ &nbsp; Fiyat Yönetimi</a></nav><div class="sidefoot">Ürün kayıtları Supabase veritabanında saklanır. Bu sürüm pazaryerlerine henüz veri göndermez.</div></aside>
+<main><div class="top"><div><div class="eyebrow">AYS CONCEPT / KATALOG</div><h1>Ürün Yönetimi</h1></div><div><span id="userEmail" class="user"></span> <button id="logoutBtn" class="logout">Çıkış</button></div></div>
+<div class="notice"><b>Bilgi:</b> Ürün ekleme, düzenleme ve silme işlemleri kendi veritabanımıza kaydedilir. Trendyol ve Hepsiburada'ya henüz aktarım yapılmaz.</div>
+<div class="toolbar"><div><h2>Ürünler</h2><p class="muted">Ürün kataloğunu buradan yönetin.</p></div><button id="addBtn" class="primary">＋ Yeni ürün ekle</button></div>
+<section class="panel"><div class="filters"><input id="search" type="search" placeholder="Ürün adı veya SKU ara..."><button id="refreshBtn" class="secondary">Yenile</button></div><div id="status" class="statusline">Ürünler yükleniyor...</div><div class="tablewrap"><table><thead><tr><th>SKU</th><th>Ürün adı</th><th class="num">Alış fiyatı</th><th class="num">Satış fiyatı</th><th class="num">Stok</th><th>İşlemler</th></tr></thead><tbody id="rows"></tbody></table></div><div id="empty" class="empty hidden">Henüz ürün eklenmemiş. “Yeni ürün ekle” ile ilk ürününüzü oluşturabilirsiniz.</div></section></main></div>
+<div id="modal" class="modalback hidden"><div class="modal"><div class="modalhead"><h2 id="modalTitle">Yeni ürün</h2><button id="close" class="secondary">✕</button></div><form id="productForm"><div class="formgrid"><div><label>Stok kodu (SKU) *</label><input id="sku" required maxlength="80" placeholder="AYS-001"></div><div><label>Ürün adı *</label><input id="name" required maxlength="180"></div><div><label>Alış fiyatı (₺)</label><input id="purchase" type="number" min="0" step=".01" value="0"></div><div><label>Satış fiyatı (₺)</label><input id="sale" type="number" min="0" step=".01" value="0"></div><div><label>Mevcut stok</label><input id="stock" type="number" min="0" step="1" value="0"></div></div><label>Açıklama</label><textarea id="description" rows="3" maxlength="2000"></textarea><div id="formMsg" class="msg"></div><div class="actions"><button type="button" id="cancel" class="secondary">Vazgeç</button><button id="save" class="primary">Kaydet</button></div></form></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script>
 <script>
-(() => {
-  const cfg = window.AYS_SUPABASE_CONFIG || {};
-  const loginView = document.getElementById('loginView');
-  const appView = document.getElementById('appView');
-  const message = document.getElementById('loginMessage');
-  const loginBtn = document.getElementById('loginBtn');
-
-  if (!window.supabase || !cfg.url || !cfg.anonKey || cfg.anonKey.includes('BURAYA_')) {
-    message.textContent = 'Kurulum tamamlanmadı: config.js dosyasına Supabase Project URL ve Publishable key girilmelidir.';
-    document.getElementById('loginForm').addEventListener('submit', e => e.preventDefault());
-    return;
-  }
-  const client = window.supabase.createClient(cfg.url, cfg.anonKey);
-
-  function showSession(session) {
-    if (session) {
-      loginView.classList.add('hidden');
-      appView.classList.remove('hidden');
-      document.getElementById('userEmail').textContent = session.user.email || 'Yönetici';
-    } else {
-      appView.classList.add('hidden');
-      loginView.classList.remove('hidden');
-    }
-  }
-
-  client.auth.getSession().then(({data, error}) => {
-    if (error) message.textContent = 'Oturum kontrol edilemedi: ' + error.message;
-    showSession(data?.session || null);
-  });
-  client.auth.onAuthStateChange((_event, session) => showSession(session));
-
-  document.getElementById('loginForm').addEventListener('submit', async e => {
-    e.preventDefault();
-    message.textContent = '';
-    loginBtn.disabled = true;
-    loginBtn.textContent = 'Kontrol ediliyor...';
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    const {error} = await client.auth.signInWithPassword({email, password});
-    if (error) message.textContent = 'Giriş yapılamadı: ' + error.message;
-    loginBtn.disabled = false;
-    loginBtn.textContent = 'Giriş yap';
-  });
-  document.getElementById('logoutBtn').addEventListener('click', async () => {
-    await client.auth.signOut();
-  });
+(()=>{const cfg=window.AYS_SUPABASE_CONFIG||{},$=id=>document.getElementById(id);if(!window.supabase||!cfg.url||!cfg.anonKey||String(cfg.anonKey).includes('BURAYA_')){$('loginMsg').textContent='config.js ayarlarını kontrol edin.';return}
+const db=window.supabase.createClient(cfg.url,cfg.anonKey);let user=null,items=[],editId=null;
+function session(s){if(s){user=s.user;$('loginView').classList.add('hidden');$('appView').classList.remove('hidden');$('userEmail').textContent=user.email||'Yönetici';load()}else{$('appView').classList.add('hidden');$('loginView').classList.remove('hidden');user=null}}
+db.auth.getSession().then(({data})=>session(data.session));db.auth.onAuthStateChange((e,s)=>session(s));
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginMsg').textContent='';$('loginBtn').disabled=true;const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)$('loginMsg').textContent=error.message;$('loginBtn').disabled=false});
+$('logoutBtn').onclick=()=>db.auth.signOut();
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const money=v=>new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY'}).format(Number(v||0));
+async function load(){if(!user)return;$('status').textContent='Ürünler yükleniyor...';const {data,error}=await db.from('products').select('id,sku,name,description,purchase_price,sale_price,stock_quantity,created_at').order('created_at',{ascending:false});if(error){$('status').textContent='Ürünler alınamadı: '+error.message;return}items=data||[];$('status').textContent=items.length+' ürün kayıtlı';render()}
+function render(){const q=$('search').value.toLocaleLowerCase('tr-TR').trim(),arr=items.filter(p=>(p.name||'').toLocaleLowerCase('tr-TR').includes(q)||(p.sku||'').toLocaleLowerCase('tr-TR').includes(q));$('rows').innerHTML=arr.map(p=>`<tr><td>${esc(p.sku)}</td><td><b>${esc(p.name)}</b></td><td class="num">${money(p.purchase_price)}</td><td class="num">${money(p.sale_price)}</td><td class="num">${Number(p.stock_quantity||0)}</td><td><button class="secondary edit" data-id="${p.id}">Düzenle</button> <button class="danger del" data-id="${p.id}">Sil</button></td></tr>`).join('');$('empty').classList.toggle('hidden',arr.length>0);document.querySelectorAll('.edit').forEach(b=>b.onclick=()=>openEdit(b.dataset.id));document.querySelectorAll('.del').forEach(b=>b.onclick=()=>del(b.dataset.id))}
+$('search').oninput=render;$('refreshBtn').onclick=load;
+function close(){ $('modal').classList.add('hidden');$('productForm').reset();$('purchase').value='0';$('sale').value='0';$('stock').value='0';editId=null}
+function open(){ $('modal').classList.remove('hidden');$('formMsg').textContent=''}
+$('addBtn').onclick=()=>{$('modalTitle').textContent='Yeni ürün ekle';close();open()};$('close').onclick=close;$('cancel').onclick=close;
+function openEdit(id){const p=items.find(x=>x.id===id);if(!p)return;editId=id;$('modalTitle').textContent='Ürünü düzenle';$('sku').value=p.sku||'';$('name').value=p.name||'';$('purchase').value=p.purchase_price??0;$('sale').value=p.sale_price??0;$('stock').value=p.stock_quantity??0;$('description').value=p.description||'';open()}
+$('productForm').onsubmit=async e=>{e.preventDefault();$('formMsg').textContent='';$('save').disabled=true;const payload={user_id:user.id,sku:$('sku').value.trim(),name:$('name').value.trim(),description:$('description').value.trim()||null,purchase_price:Number($('purchase').value||0),sale_price:Number($('sale').value||0),stock_quantity:Number($('stock').value||0)};if(payload.purchase_price<0||payload.sale_price<0||!Number.isInteger(payload.stock_quantity)||payload.stock_quantity<0){$('formMsg').textContent='Negatif olmayan fiyat ve tam sayı stok girin.';$('save').disabled=false;return}const res=editId?await db.from('products').update(payload).eq('id',editId):await db.from('products').insert(payload);if(res.error)$('formMsg').textContent='Kaydedilemedi: '+res.error.message;else{close();await load()}$('save').disabled=false};
+async function del(id){const p=items.find(x=>x.id===id);if(!p||!confirm(`"${p.name}" ürünü silinsin mi?`))return;const {error}=await db.from('products').delete().eq('id',id);if(error)alert('Silinemedi: '+error.message);else load()}
 })();
-</script>
-</body>
-</html>
+</script></body></html>
