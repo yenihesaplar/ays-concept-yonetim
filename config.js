@@ -3,5 +3,5 @@
 // service_role / secret key kesinlikle buraya yazılmaz.
 window.AYS_SUPABASE_CONFIG = {
   url: "https://etmcdxzyltyllangnzgt.supabase.co",
-  anonKey: "BURAYA_PUBLISHABLE_KEY"
+  anonKey: "sb_publishable_Qa6xAyCJ1WtbqdrAQXKPGQ_W7BmWwcb"
 };
